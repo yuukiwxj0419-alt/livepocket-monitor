@@ -11,9 +11,14 @@ from bs4 import BeautifulSoup
 # ------------------------------------------------------------------
 DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1510619850739810365/fiNIWvRnWCACfXmq4eJLUCaW2I_lQLV6SLerwvfc8SOqTa7CMYAFpANrnAvFw3sWVzx0"
 
-# 山本さん専用：関西を拠点にする・またはよく使われるショップのLivePocket主催者IDリスト
-# (例: 2269 は BIG MAGIC のIDです。ここに必要なショップIDをどんどん追加していけます)
-TARGET_ORGANIZERS = ["2269"]
+# 山本さん専用：関西主要トレカショップ包囲網リスト
+TARGET_ORGANIZERS = [
+    "2269",  # BIG MAGIC なんば店
+    "1437",  # ドラゴンスター系列
+    "3255",  # カードショップ竜星のPAO
+    "4765",  # トレカチャンス
+    "2344"   # Clove Lounge
+]
 
 # 監視キーワード（どれか1つでも入っていれば検知します）
 MONITOR_KEYWORDS = ["ポケカ", "ポケモン", "ワンピース", "ONE PIECE", "ドラゴンボール", "DRAGON BALL", "抽選", "予約", "先着"]
@@ -30,8 +35,8 @@ def send_discord(message):
 
 # LivePocketを直接巡回するスクレイピング・エンジン
 def watch_livepocket():
-    print("【LivePocket本命エンジン】関西ショップの自動監視を開始しました。")
-    send_discord("📢 【LivePocket特化システム】起動しました！転売ヤーの鼻を明かすため、関西主要ショップのゲリラ抽選・先着URLを24時間体制で監視します。")
+    print("【LivePocket強化包囲網】自動監視を開始しました。")
+    send_discord("📢 【LivePocket強化包囲網】システムをアップデートしました！関西主要5ショップのゲリラ抽選・先着URLを24時間体制で同時監視します。")
     
     while True:
         try:
@@ -57,14 +62,14 @@ def watch_livepocket():
                                 
                                 # キーワードに一致するかチェック
                                 if any(keyword in title_text for keyword in MONITOR_KEYWORDS):
-                                    message = f"@everyone 🚨【LivePocketゲリラ検知！】🚨\n山本さん、関西ショップの新着予約・抽選ページを捕捉しました！\n\n【タイトル】: {title_text}\n【購入・申込URL】: {full_url}"
+                                    message = f"@everyone 🚨【LivePocketゲリラ検知！】🚨\n山本さん、対象ショップの新着予約・抽選ページを捕捉しました！\n\n【タイトル】: {title_text}\n【購入・申込URL】: {full_url}"
                                     send_discord(message)
                                     NOTIFIED_URLS.add(full_url)
                                     
         except Exception as e:
             print(f"監視中にエラー（次回自動復旧）: {e}")
             
-        # 3分おきに見回り（サイトに迷惑をかけない安全な速度）
+        # 各ショップを巡回後、3分おきに見回り（サイトに迷惑をかけない安全な速度）
         time.sleep(180)
 
 # Renderのシャットダウン対策（生存報告用ダミーサーバー）
