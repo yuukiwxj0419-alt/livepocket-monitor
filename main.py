@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 # ------------------------------------------------------------------
 # 【重要】あなたのDiscord Webhook URLをここに確実に貼り付けてください
 # ------------------------------------------------------------------
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1510619850739810365/f1NiWVrnWCACfXmq4eJLUCAw2I_1QLV6SLerwvfc8SOqTa7CMYAFpAnrNAvFw3sWvzx0"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1510619850739810365/fiNIWvRnWCACfXmq4eJLUCaW2I_lQLV6SLerwvfc8SOqTa7CMYAFpANrnAvFw3sWVzx0"
 
 # 山本さん専用：関西を拠点にする・またはよく使われるショップのLivePocket主催者IDリスト
 # (例: 2269 は BIG MAGIC のIDです。ここに必要なショップIDをどんどん追加していけます)
